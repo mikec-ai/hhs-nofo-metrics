@@ -127,14 +127,17 @@ def _validate_profile(profile: MetricProfile) -> None:
 
 def _readability_sentences(
     segments: tuple[Segment, ...],
-) -> tuple[tuple[str, ...], int]:
+) -> tuple[tuple[str, ...], int, int]:
     sentences: list[str] = []
+    paragraph_count = 0
     excluded_fragment_count = 0
     for segment in segments:
         split = split_semantic_block_sentences(segment.text)
+        if split.sentences:
+            paragraph_count += 1
         sentences.extend(split.sentences)
         excluded_fragment_count += len(split.excluded_fragments)
-    return tuple(sentences), excluded_fragment_count
+    return tuple(sentences), paragraph_count, excluded_fragment_count
 
 
 def analyze_semantic_document(
@@ -200,8 +203,8 @@ def analyze_semantic_document(
             for segment in readability_segments
             if segment.role != "unknown" or tokenize_hhs_readability_draft(segment.text)
         )
-    readability_sentences, excluded_fragments = _readability_sentences(
-        readability_segments
+    readability_sentences, readability_paragraph_count, excluded_fragments = (
+        _readability_sentences(readability_segments)
     )
     calculation = calculate_resolved_measurement_scope(
         ResolvedMeasurementScope(
@@ -241,7 +244,7 @@ def analyze_semantic_document(
         excluded_readability_segments = tuple(
             segment for segment in readability_segments if segment.role != "unknown"
         )
-        excluded_readability_sentences, _ = _readability_sentences(
+        excluded_readability_sentences, _, _ = _readability_sentences(
             excluded_readability_segments
         )
         excluded_unknown_calculation = calculate_resolved_measurement_scope(
@@ -310,9 +313,14 @@ def analyze_semantic_document(
         components = {
             "word_count": counts.readability_word_count,
             "sentence_count": counts.sentence_count,
+            "paragraph_count": readability_paragraph_count,
             "character_count": counts.character_count,
             "syllable_count": counts.syllable_count,
         }
+        if readability_paragraph_count:
+            components["sentences_per_paragraph"] = (
+                counts.sentence_count / readability_paragraph_count
+            )
         if metric_id == "passive_sentence_percentage":
             assert counts.passive_sentence_count is not None
             components["passive_sentence_count"] = counts.passive_sentence_count

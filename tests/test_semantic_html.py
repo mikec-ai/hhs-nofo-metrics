@@ -120,6 +120,10 @@ def test_html_analysis_uses_source_structure_and_publishes_no_source_text() -> N
     assert result.metrics["word_count"].value == 21
     assert result.metrics["words_per_sentence"].value == 3
     assert result.metrics["words_per_sentence"].components["sentence_count"] == 4
+    assert result.metrics["words_per_sentence"].components["paragraph_count"] == 3
+    assert result.metrics["words_per_sentence"].components[
+        "sentences_per_paragraph"
+    ] == pytest.approx(4 / 3)
     assert result.metrics["passive_sentence_percentage"].status == "calculated"
     assert result.metrics["passive_sentence_percentage"].value == 0
     assert result.coverage.role_counts == {

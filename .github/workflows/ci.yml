@@ -83,7 +83,7 @@ jobs:
         run: |
           python -m venv /tmp/hhs-nofo-metrics-wheel-smoke
           /tmp/hhs-nofo-metrics-wheel-smoke/bin/python -m pip install dist/*.whl
-          test "$(/tmp/hhs-nofo-metrics-wheel-smoke/bin/hhs-nofo-metrics --version)" = "0.5.0"
+          test "$(/tmp/hhs-nofo-metrics-wheel-smoke/bin/hhs-nofo-metrics --version)" = "0.5.1"
           /tmp/hhs-nofo-metrics-wheel-smoke/bin/hhs-nofo-metrics | grep 'profiles\[3\]:'
           /tmp/hhs-nofo-metrics-wheel-smoke/bin/hhs-nofo-metrics profiles list --json | python -m json.tool > /dev/null
           /tmp/hhs-nofo-metrics-wheel-smoke/bin/hhs-nofo-metrics --help

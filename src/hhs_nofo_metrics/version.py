@@ -6,7 +6,7 @@ from importlib import metadata
 from typing import Final
 
 PACKAGE_NAME: Final = "hhs-nofo-metrics"
-SOURCE_FALLBACK_VERSION: Final = "0.5.0"
+SOURCE_FALLBACK_VERSION: Final = "0.5.1"
 
 
 def package_version() -> str:

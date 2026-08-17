@@ -9,6 +9,13 @@ package release may support more than one measurement contract.
 
 No unreleased changes.
 
+## [0.5.1] - 2026-08-17
+
+### Added
+
+- Sentence-bearing semantic-block counts and average sentences per paragraph
+  as source-neutral components of every sentence-scope metric result.
+
 ## [0.5.0] - 2026-08-11
 
 Initial public release.

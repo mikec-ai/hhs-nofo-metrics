@@ -21,6 +21,8 @@ and it does not perform generative-AI review.
 - Six deterministic metrics: Word Count, average words per sentence,
   characters per word, Flesch Reading Ease, Flesch-Kincaid Grade Level, and
   passive-sentence percentage.
+- Sentence-scope results also publish the count of sentence-bearing semantic
+  blocks and average sentences per paragraph for consumer presentation.
 - Versioned profiles and source-free result contracts.
 - Reliability-aware PDF estimates for tagged-PDF workflows.
 - Three versioned, built-in extraction adapters with a shared internal contract.

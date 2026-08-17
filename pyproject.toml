@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hhs-nofo-metrics"
-version = "0.5.0"
+version = "0.5.1"
 description = "Versioned, reproducible readability metrics for HHS NOFO documents"
 readme = "README.md"
 license = "MIT"
