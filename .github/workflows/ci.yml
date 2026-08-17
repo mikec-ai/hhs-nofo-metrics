@@ -111,7 +111,7 @@ jobs:
         run: |
           python -m venv /tmp/hhs-nofo-metrics-sdist-smoke
           /tmp/hhs-nofo-metrics-sdist-smoke/bin/python -m pip install dist/*.tar.gz
-          test "$(/tmp/hhs-nofo-metrics-sdist-smoke/bin/hhs-nofo-metrics --version)" = "0.5.0"
+          test "$(/tmp/hhs-nofo-metrics-sdist-smoke/bin/hhs-nofo-metrics --version)" = "0.5.1"
           /tmp/hhs-nofo-metrics-sdist-smoke/bin/python - <<'PY'
           from hhs_nofo_metrics import AnalysisResult, list_profiles
 
